@@ -17,6 +17,6 @@ public class Customer {
     @ManyToOne
     private BikeShop bikeShop;
     @OneToMany
-    private List<CustomerBikes> customerBikes;
+    private List<CustomerBike> customerBikes;
 
 }

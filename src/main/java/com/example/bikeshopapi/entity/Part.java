@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Parts {
+public class Part {
 
     @Id
     @GeneratedValue

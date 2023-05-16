@@ -2,7 +2,6 @@ package com.example.bikeshopapi.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Generated;
 
 import java.util.List;
 
@@ -23,11 +22,11 @@ public class BikeShop {
     @OneToMany
     private List<Customer> customers;
     @OneToMany
-    private List<SaleableBikes> saleableBikes;
+    private List<SaleableBike> saleableBikes;
     @OneToMany
-    private List<Parts> parts;
+    private List<Part> parts;
     @OneToMany
-    private List<CustomerBikes> customerBikes;
+    private List<CustomerBike> customerBikes;
 
 
 }
