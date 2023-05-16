@@ -16,6 +16,7 @@ public class BikeShop {
 
     private String name;
     private String address;
+    private String phone;
 
     @OneToMany
     private List<Mechanic> mechanics;
