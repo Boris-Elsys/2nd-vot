@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class SaleableBike {
+public class SaleableBike extends Bike {
 
     @Id
     @GeneratedValue

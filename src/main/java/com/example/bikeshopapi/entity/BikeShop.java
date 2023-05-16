@@ -17,15 +17,15 @@ public class BikeShop {
     private String address;
     private String phone;
 
-    @OneToMany
+    @OneToMany(mappedBy = "bikeShop")
     private List<Mechanic> mechanics;
-    @OneToMany
+    @OneToMany(mappedBy = "bikeShop")
     private List<Customer> customers;
-    @OneToMany
+    @OneToMany(mappedBy = "bikeShop")
     private List<SaleableBike> saleableBikes;
-    @OneToMany
+    @OneToMany(mappedBy = "bikeShop")
     private List<Part> parts;
-    @OneToMany
+    @OneToMany(mappedBy = "bikeShop")
     private List<CustomerBike> customerBikes;
 
 

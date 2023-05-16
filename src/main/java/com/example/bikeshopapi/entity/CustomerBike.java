@@ -1,19 +1,19 @@
 package com.example.bikeshopapi.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
-public class CustomerBike {
+public class CustomerBike extends Bike{
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @OneToMany
+    @ManyToOne
+    private BikeShop bikeShop;
+
+    @ManyToOne
     private Customer owner;
 }
