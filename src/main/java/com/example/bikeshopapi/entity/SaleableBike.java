@@ -7,10 +7,6 @@ import lombok.Data;
 @Data
 public class SaleableBike extends Bike {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-
     private double price;
 
     @ManyToOne
