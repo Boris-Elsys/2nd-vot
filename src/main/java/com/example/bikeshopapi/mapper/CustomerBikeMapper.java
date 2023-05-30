@@ -11,7 +11,7 @@ import java.util.List;
 public interface CustomerBikeMapper {
     public CustomerBikeMapper CUSTOMER_BIKE_MAPPER = Mappers.getMapper(CustomerBikeMapper.class);
     CustomerBike fromCustomerBikeResource(CustomerBikeResource resource);
-    CustomerBikeResource toCustomerBikeRecources(CustomerBike customerBike);
-    List<CustomerBikeResource> toCustomerBikeResources(List<CustomerBike> customer);
+    CustomerBikeResource toCustomerBikeResources(CustomerBike customerBike);
+    List<CustomerBikeResource> toCustomerBikeResources(List<CustomerBike> customerBikes);
 
 }
