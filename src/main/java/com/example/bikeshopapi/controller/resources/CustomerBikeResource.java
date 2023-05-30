@@ -6,5 +6,5 @@ import lombok.Data;
 public class CustomerBikeResource extends BikeResource {
 
     private String bikeShopName;
-    private String ownerAddress;
+    private String ownerName;
 }
