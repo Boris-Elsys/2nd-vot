@@ -3,8 +3,9 @@ package com.example.bikeshopapi.controller.resources;
 import lombok.Data;
 
 @Data
-public class CustomerBikeResource extends BikeResource {
+public class SaleableBikeResource extends BikeResource {
 
     private String bikeShopName;
-    private String ownerAddress;
+    private double price;
+
 }

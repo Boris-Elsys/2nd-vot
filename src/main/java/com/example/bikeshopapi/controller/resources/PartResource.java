@@ -2,11 +2,12 @@ package com.example.bikeshopapi.controller.resources;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class CustomerResource {
+public class PartResource {
+
     private Long id;
     private String name;
-    private List<CustomerBikeResource> customerBikes;
+    private double price;
+    private int quantity;
+    private String bikeShopName;
 }
