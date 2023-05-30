@@ -9,8 +9,8 @@ import java.util.List;
 
 @Mapper(uses = {BikeShopMapper.class})
 public interface SaleableBikeMapper {
-    public SaleableBikeMapper CUSTOMER_BIKE_MAPPER = Mappers.getMapper(SaleableBikeMapper.class);
-    SaleableBike fromCustomerBikeResource(SaleableBikeResource resource);
+    public SaleableBikeMapper SALEABLE_BIKE_MAPPER = Mappers.getMapper(SaleableBikeMapper.class);
+    SaleableBike fromSaleableBikeResource(SaleableBikeResource resource);
     SaleableBikeResource toSaleableBikeResources(SaleableBike saleableBike);
     List<SaleableBikeResource> toSaleableBikeResources(List<SaleableBike> saleableBikes);
 
