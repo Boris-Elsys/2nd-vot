@@ -15,5 +15,6 @@ public interface CustomerMapper {
     Customer fromCustomerResource(CustomerResource customerResource);
     CustomerResource toCustomerResource(Customer customer);
     List<CustomerResource> toCustomerResources(List<Customer> customers);
+    List<Customer> fromCustomerResources(List<CustomerResource> customerResources);
 
 }

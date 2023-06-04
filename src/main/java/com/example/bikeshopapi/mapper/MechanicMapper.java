@@ -17,7 +17,8 @@ public interface MechanicMapper {
     Mechanic fromMechanicResource(MechanicResource resource);
 
     @Mapping(source = "bikeShopName", target = "bikeShop.name")
-    MechanicResource toMechanicResources(Mechanic mechanic);
-    List<MechanicResource> toMechanicResources(List<MechanicMapper> mechanics);
+    MechanicResource toMechanicResource(Mechanic mechanic);
+    List<MechanicResource> toMechanicResources(List<Mechanic> mechanics);
 
+    List<Mechanic> fromMechanicResources(List<MechanicResource> mechanicResources);
 }

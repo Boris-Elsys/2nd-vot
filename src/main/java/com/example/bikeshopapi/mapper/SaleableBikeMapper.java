@@ -16,7 +16,8 @@ public interface SaleableBikeMapper {
     SaleableBike fromSaleableBikeResource(SaleableBikeResource resource);
 
     @Mapping(source = "bikeShopName", target = "bikeShop.name")
-    SaleableBikeResource toSaleableBikeResources(SaleableBike saleableBike);
+    SaleableBikeResource toSaleableBikeResource(SaleableBike saleableBike);
     List<SaleableBikeResource> toSaleableBikeResources(List<SaleableBike> saleableBikes);
+    List<SaleableBike> fromSaleableBikeResources(List<SaleableBikeResource> saleableBikeResources);
 
 }

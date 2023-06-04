@@ -19,7 +19,7 @@ public interface CustomerBikeMapper {
 
     @Mapping(source = "ownerName", target = "owner.name")
     @Mapping(source = "bikeShopName", target = "bikeShop.name")
-    CustomerBikeResource toCustomerBikeResources(CustomerBike customerBike);
+    CustomerBikeResource toCustomerBikeResource(CustomerBike customerBike);
 
     List<CustomerBikeResource> toCustomerBikeResources(List<CustomerBike> customerBikes);
 

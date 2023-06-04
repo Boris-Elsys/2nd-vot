@@ -4,7 +4,7 @@ import com.example.bikeshopapi.controller.resources.CustomerBikeResource;
 
 import java.util.List;
 
-public interface CustomerBikeService {
+public interface CustomerBikeService{
 
     List<CustomerBikeResource> getAll();
     CustomerBikeResource getById(Long id);
