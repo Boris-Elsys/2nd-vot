@@ -23,4 +23,6 @@ public interface CustomerBikeMapper {
 
     List<CustomerBikeResource> toCustomerBikeResources(List<CustomerBike> customerBikes);
 
+    List<CustomerBike> fromCustomerBikeResources(List<CustomerBikeResource> customerBikeResources);
+
 }
