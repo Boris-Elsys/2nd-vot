@@ -13,12 +13,12 @@ public interface CustomerBikeMapper {
 
     public CustomerBikeMapper CUSTOMER_BIKE_MAPPER = Mappers.getMapper(CustomerBikeMapper.class);
 
-    @Mapping(source = "owner.name", target = "ownerName")
-    @Mapping(source = "bikeShop.name", target = "bikeShopName")
-    CustomerBike fromCustomerBikeResource(CustomerBikeResource resource);
-
     @Mapping(source = "ownerName", target = "owner.name")
     @Mapping(source = "bikeShopName", target = "bikeShop.name")
+    CustomerBike fromCustomerBikeResource(CustomerBikeResource resource);
+
+    @Mapping(source = "owner.name", target = "ownerName")
+    @Mapping(source = "bikeShop.name", target = "bikeShopName")
     CustomerBikeResource toCustomerBikeResource(CustomerBike customerBike);
 
     List<CustomerBikeResource> toCustomerBikeResources(List<CustomerBike> customerBikes);
