@@ -15,6 +15,7 @@ import static com.example.bikeshopapi.mapper.CustomerBikeMapper.CUSTOMER_BIKE_MA
 @RequiredArgsConstructor
 public class CustomerBikeServiceImpl implements CustomerBikeService {
     private final CustomerBikeRepository customerBikeRepository;
+
     @Override
     public CustomerBikeResource getById(Long id) {
         return CUSTOMER_BIKE_MAPPER.toCustomerBikeResource(customerBikeRepository.getReferenceById(id));
