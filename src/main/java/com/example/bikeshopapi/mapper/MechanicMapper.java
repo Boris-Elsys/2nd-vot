@@ -1,8 +1,6 @@
 package com.example.bikeshopapi.mapper;
 
-import com.example.bikeshopapi.controller.resources.CustomerBikeResource;
 import com.example.bikeshopapi.controller.resources.MechanicResource;
-import com.example.bikeshopapi.entity.CustomerBike;
 import com.example.bikeshopapi.entity.Mechanic;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
