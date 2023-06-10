@@ -8,7 +8,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(uses = {BikeShopMapper.class})
+@Mapper
 public interface PartMapper {
     public PartMapper PART_MAPPER = Mappers.getMapper(PartMapper.class);
     @Mapping(source = "bikeShop.name", target = "bikeShopName")
