@@ -19,8 +19,8 @@ public class MechanicController {
         return ResponseEntity.ok(mechanicService.getAll());
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<?> getById(Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
         return ResponseEntity.ok(mechanicService.getById(id));
     }
 
@@ -36,7 +36,6 @@ public class MechanicController {
     public ResponseEntity<?> update(@RequestBody MechanicResource mechanicResource, @PathVariable Long id) {
         return ResponseEntity.ok(mechanicService.update(mechanicResource, id));
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         mechanicService.delete(id);
