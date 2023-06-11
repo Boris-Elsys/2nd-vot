@@ -30,7 +30,6 @@ public class CustomerBikeServiceImpl implements CustomerBikeService {
     public CustomerBikeResource save(CustomerBikeResource customerBikeResource) {
 
         CustomerBike customerBikeToSave = CUSTOMER_BIKE_MAPPER.fromCustomerBikeResource(customerBikeResource);
-        customerBikeToSave.setId(customerBikeToSave.getId());
         customerBikeToSave.setBikeShop(customerBikeToSave.getBikeShop());
         customerBikeToSave.setOwner(customerBikeToSave.getOwner());
         customerBikeToSave.setBrand(customerBikeToSave.getBrand());

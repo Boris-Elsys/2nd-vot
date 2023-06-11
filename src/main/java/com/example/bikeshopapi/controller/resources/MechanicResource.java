@@ -9,5 +9,5 @@ public class MechanicResource {
 
     private Long id;
     private String name;
-    private String bikeShopName;
+    private Long bikeShopId;
 }

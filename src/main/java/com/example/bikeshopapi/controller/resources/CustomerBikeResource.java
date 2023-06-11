@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class CustomerBikeResource extends BikeResource {
 
-    private String bikeShopName;
-    private String ownerName;
+    private Long bikeShopId;
+    private Long ownerId;
 }

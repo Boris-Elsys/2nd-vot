@@ -1,6 +1,7 @@
 package com.example.bikeshopapi.service.Impl;
 
 import com.example.bikeshopapi.controller.resources.MechanicResource;
+import com.example.bikeshopapi.entity.BikeShop;
 import com.example.bikeshopapi.entity.Mechanic;
 import com.example.bikeshopapi.repository.BikeShopRepository;
 import com.example.bikeshopapi.repository.MechanicRepository;
@@ -33,9 +34,10 @@ public class MechanicServiceImpl implements MechanicService {
     public MechanicResource save(MechanicResource mechanicResource) {
 
         Mechanic mechanicToSave = MECHANIC_MAPPER.fromMechanicResource(mechanicResource);
-        mechanicToSave.setId(mechanicResource.getId());
         mechanicToSave.setName(mechanicResource.getName());
-        mechanicToSave.setBikeShop(bikeShopRepository.getReferenceByName(mechanicResource.getBikeShopName()));
+        BikeShop referenceById = bikeShopRepository.getReferenceById(mechanicResource.getBikeShopId());
+        mechanicToSave.setBikeShop(referenceById);
+
 
         return MECHANIC_MAPPER.toMechanicResource(mechanicRepository.save(mechanicToSave));
 
@@ -47,7 +49,7 @@ public class MechanicServiceImpl implements MechanicService {
             Mechanic mechanicToUpdate = mechanicRepository.getReferenceById(id);
             mechanicToUpdate.setId(mechanicResource.getId());
             mechanicToUpdate.setName(mechanicResource.getName());
-            mechanicToUpdate.setBikeShop(bikeShopRepository.getReferenceByName(mechanicResource.getBikeShopName()));
+            mechanicToUpdate.setBikeShop(bikeShopRepository.getReferenceById(mechanicResource.getBikeShopId()));
 
             return MECHANIC_MAPPER.toMechanicResource(mechanicRepository.save(mechanicToUpdate));
     }
