@@ -14,9 +14,8 @@ public class Customer {
     private Long id;
 
     private String name;
-    @ManyToOne
-    private BikeShop bikeShop;
-    @OneToMany
+
+    @OneToMany(mappedBy = "owner")
     private List<CustomerBike> customerBikes;
 
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface CustomerBikeMapper {
 
-    public CustomerBikeMapper CUSTOMER_BIKE_MAPPER = Mappers.getMapper(CustomerBikeMapper.class);
+    CustomerBikeMapper CUSTOMER_BIKE_MAPPER = Mappers.getMapper(CustomerBikeMapper.class);
 
     @Mapping(source = "ownerId", target = "owner.id")
     @Mapping(source = "bikeShopId", target = "bikeShop.id")

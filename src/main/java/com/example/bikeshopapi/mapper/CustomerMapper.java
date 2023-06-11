@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper(uses = {CustomerBikeMapper.class})
 public interface CustomerMapper {
 
-    public CustomerMapper CUSTOMER_MAPPER = Mappers.getMapper(CustomerMapper.class);
+    CustomerMapper CUSTOMER_MAPPER = Mappers.getMapper(CustomerMapper.class);
 
     Customer fromCustomerResource(CustomerResource customerResource);
     CustomerResource toCustomerResource(Customer customer);
