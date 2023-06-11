@@ -10,7 +10,8 @@ import java.util.List;
 
 @Mapper
 public interface MechanicMapper {
-    public MechanicMapper MECHANIC_MAPPER = Mappers.getMapper(MechanicMapper.class);
+    MechanicMapper MECHANIC_MAPPER = Mappers.getMapper(MechanicMapper.class);
+
     @Mapping(source = "bikeShop.name", target = "bikeShopName")
     MechanicResource toMechanicResource(Mechanic mechanic);
 
