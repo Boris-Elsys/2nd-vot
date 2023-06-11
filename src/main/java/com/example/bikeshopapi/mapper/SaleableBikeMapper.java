@@ -12,10 +12,10 @@ import java.util.List;
 public interface SaleableBikeMapper {
     SaleableBikeMapper SALEABLE_BIKE_MAPPER = Mappers.getMapper(SaleableBikeMapper.class);
 
-    @Mapping(source = "bikeShopName", target = "bikeShop.name")
+    @Mapping(source = "bikeShopId", target = "bikeShop.id")
     SaleableBike fromSaleableBikeResource(SaleableBikeResource resource);
 
-    @Mapping(source = "bikeShop.name", target = "bikeShopName")
+    @Mapping(source = "bikeShop.id", target = "bikeShopId")
     SaleableBikeResource toSaleableBikeResource(SaleableBike saleableBike);
     List<SaleableBikeResource> toSaleableBikeResources(List<SaleableBike> saleableBikes);
     List<SaleableBike> fromSaleableBikeResources(List<SaleableBikeResource> saleableBikeResources);

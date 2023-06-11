@@ -11,7 +11,6 @@ public class BikeShopResource {
     private String address;
     private String phone;
     private List<MechanicResource> mechanics;
-    private List<CustomerResource> customers;
     private List<SaleableBikeResource> saleableBikes;
     private List<PartResource> parts;
     private List<CustomerBikeResource> customerBikes;

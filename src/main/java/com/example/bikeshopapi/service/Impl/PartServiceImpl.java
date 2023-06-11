@@ -33,11 +33,10 @@ public class PartServiceImpl implements PartService {
     public PartResource save(PartResource partResource) {
 
         Part partToSave = PART_MAPPER.fromPartResource(partResource);
-        partToSave.setId(partResource.getId());
         partToSave.setName(partResource.getName());
         partToSave.setPrice(partResource.getPrice());
         partToSave.setQuantity(partResource.getQuantity());
-        partToSave.setBikeShop(bikeShopRepository.getReferenceByName(partResource.getBikeShopName()));
+        partToSave.setBikeShop(bikeShopRepository.getReferenceById(partResource.getBikeShopId()));
 
         return PART_MAPPER.toPartResource(partRepository.save(partToSave));
 
@@ -51,7 +50,7 @@ public class PartServiceImpl implements PartService {
             partToUpdate.setName(partResource.getName());
             partToUpdate.setPrice(partResource.getPrice());
             partToUpdate.setQuantity(partResource.getQuantity());
-            partToUpdate.setBikeShop(bikeShopRepository.getReferenceByName(partResource.getBikeShopName()));
+            partToUpdate.setBikeShop(bikeShopRepository.getReferenceById(partResource.getBikeShopId()));
 
             return PART_MAPPER.toPartResource(partRepository.save(partToUpdate));
     }

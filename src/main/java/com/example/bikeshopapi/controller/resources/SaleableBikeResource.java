@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class SaleableBikeResource extends BikeResource {
 
-    private String bikeShopName;
+    private Long bikeShopId;
     private double price;
 
 }

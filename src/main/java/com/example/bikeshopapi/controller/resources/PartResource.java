@@ -9,5 +9,5 @@ public class PartResource {
     private String name;
     private double price;
     private int quantity;
-    private String bikeShopName;
+    private Long bikeShopId;
 }

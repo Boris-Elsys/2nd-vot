@@ -31,7 +31,6 @@ public class SaleableBikeServiceImpl implements SaleableBikeService {
     public SaleableBikeResource save(SaleableBikeResource saleableBikeResource) {
 
         SaleableBike saleableBikeToSave = SALEABLE_BIKE_MAPPER.fromSaleableBikeResource(saleableBikeResource);
-        saleableBikeToSave.setId(saleableBikeToSave.getId());
         saleableBikeToSave.setBikeShop(saleableBikeToSave.getBikeShop());
         saleableBikeToSave.setPrice(saleableBikeToSave.getPrice());
         saleableBikeToSave.setBrand(saleableBikeToSave.getBrand());
@@ -51,7 +50,7 @@ public class SaleableBikeServiceImpl implements SaleableBikeService {
 
         SaleableBikeResource saleableBikeToUpdate = getById(id);
         saleableBikeToUpdate.setId(saleableBikeToUpdate.getId());
-        saleableBikeToUpdate.setBikeShopName(saleableBikeToUpdate.getBikeShopName());
+        saleableBikeToUpdate.setBikeShopId(saleableBikeToUpdate.getBikeShopId());
         saleableBikeToUpdate.setBrand(saleableBikeToUpdate.getBrand());
         saleableBikeToUpdate.setModel(saleableBikeToUpdate.getModel());
         saleableBikeToUpdate.setColor(saleableBikeToUpdate.getColor());

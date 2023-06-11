@@ -12,10 +12,10 @@ import java.util.List;
 public interface PartMapper {
     PartMapper PART_MAPPER = Mappers.getMapper(PartMapper.class);
 
-    @Mapping(source = "bikeShopName", target = "bikeShop.name")
+    @Mapping(source = "bikeShopId", target = "bikeShop.id")
     Part fromPartResource(PartResource resource);
 
-    @Mapping(source = "bikeShop.name", target = "bikeShopName")
+    @Mapping(source = "bikeShop.id", target = "bikeShopId")
     PartResource toPartResource(Part part);
 
     List<PartResource> toPartResources(List<Part> parts);

@@ -20,8 +20,6 @@ public class BikeShop {
     @OneToMany(mappedBy = "bikeShop")
     private List<Mechanic> mechanics;
     @OneToMany(mappedBy = "bikeShop")
-    private List<Customer> customers;
-    @OneToMany(mappedBy = "bikeShop")
     private List<SaleableBike> saleableBikes;
     @OneToMany(mappedBy = "bikeShop")
     private List<Part> parts;

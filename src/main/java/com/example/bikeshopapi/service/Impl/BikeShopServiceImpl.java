@@ -37,15 +37,12 @@ public class BikeShopServiceImpl implements BikeShopService {
     public BikeShopResource save(BikeShopResource bikeShopResource) {
 
         BikeShop bikeShopToSave = BIKE_SHOP_MAPPER.fromBikeShopResource(bikeShopResource);
-        bikeShopToSave.setId(bikeShopResource.getId());
         bikeShopToSave.setName(bikeShopResource.getName());
         bikeShopToSave.setAddress(bikeShopResource.getAddress());
         bikeShopToSave.setPhone(bikeShopResource.getPhone());
         bikeShopToSave.setMechanics(MECHANIC_MAPPER.fromMechanicResources(bikeShopResource.getMechanics()));
         bikeShopToSave.setSaleableBikes(SALEABLE_BIKE_MAPPER.fromSaleableBikeResources(bikeShopResource.getSaleableBikes()));
         bikeShopToSave.setParts(PART_MAPPER.fromPartResources(bikeShopResource.getParts()));
-        bikeShopToSave.setCustomerBikes(CUSTOMER_BIKE_MAPPER.fromCustomerBikeResources(bikeShopResource.getCustomerBikes()));
-        bikeShopToSave.setCustomers(CUSTOMER_MAPPER.fromCustomerResources(bikeShopResource.getCustomers()));
 
         return BIKE_SHOP_MAPPER.toBikeShopResource(bikeShopRepository.save(bikeShopToSave));
 
@@ -63,7 +60,6 @@ public class BikeShopServiceImpl implements BikeShopService {
         bikeShopToUpdate.setSaleableBikes(SALEABLE_BIKE_MAPPER.fromSaleableBikeResources(bikeShopResource.getSaleableBikes()));
         bikeShopToUpdate.setParts(PART_MAPPER.fromPartResources(bikeShopResource.getParts()));
         bikeShopToUpdate.setCustomerBikes(CUSTOMER_BIKE_MAPPER.fromCustomerBikeResources(bikeShopResource.getCustomerBikes()));
-        bikeShopToUpdate.setCustomers(CUSTOMER_MAPPER.fromCustomerResources(bikeShopResource.getCustomers()));
 
         return BIKE_SHOP_MAPPER.toBikeShopResource(bikeShopRepository.save(bikeShopToUpdate));
     }

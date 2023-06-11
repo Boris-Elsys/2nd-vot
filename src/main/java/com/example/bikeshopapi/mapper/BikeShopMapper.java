@@ -7,7 +7,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(uses = {MechanicMapper.class, CustomerMapper.class, SaleableBikeMapper.class, PartMapper.class, CustomerBikeMapper.class})
+@Mapper(uses = {MechanicMapper.class, SaleableBikeMapper.class, PartMapper.class, CustomerBikeMapper.class})
 public interface BikeShopMapper {
 
     public BikeShopMapper BIKE_SHOP_MAPPER = Mappers.getMapper(BikeShopMapper.class);
