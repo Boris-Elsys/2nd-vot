@@ -12,10 +12,10 @@ import java.util.List;
 public interface MechanicMapper {
     MechanicMapper MECHANIC_MAPPER = Mappers.getMapper(MechanicMapper.class);
 
-    @Mapping(source = "bikeShop.name", target = "bikeShopName")
+    @Mapping(source = "bikeShop.id", target = "bikeShopId")
     MechanicResource toMechanicResource(Mechanic mechanic);
 
-    @Mapping(source = "bikeShopName", target = "bikeShop.name")//flipped
+    @Mapping(source = "bikeShopId", target = "bikeShop.id")//flipped
     Mechanic fromMechanicResource(MechanicResource resource);
     List<MechanicResource> toMechanicResources(List<Mechanic> mechanics);
 
