@@ -33,7 +33,7 @@ public class BikeShopController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(BikeShopResource bikeShopResource, Long id) {
+    public ResponseEntity<?> update(@RequestBody BikeShopResource bikeShopResource, @PathVariable Long id) {
         return ResponseEntity.ok(bikeShopService.update(bikeShopResource, id));
     }
 

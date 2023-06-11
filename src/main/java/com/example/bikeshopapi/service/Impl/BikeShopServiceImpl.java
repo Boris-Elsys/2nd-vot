@@ -52,7 +52,6 @@ public class BikeShopServiceImpl implements BikeShopService {
     public BikeShopResource update(BikeShopResource bikeShopResource, Long id) {
 
         BikeShop bikeShopToUpdate = bikeShopRepository.getReferenceById(id);
-        bikeShopToUpdate.setId(bikeShopResource.getId());
         bikeShopToUpdate.setName(bikeShopResource.getName());
         bikeShopToUpdate.setAddress(bikeShopResource.getAddress());
         bikeShopToUpdate.setPhone(bikeShopResource.getPhone());
