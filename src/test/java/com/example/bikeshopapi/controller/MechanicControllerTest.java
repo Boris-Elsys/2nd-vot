@@ -82,14 +82,14 @@ class MechanicControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.name").value("Az"))
-                .andExpect(jsonPath("$.bikeShopName").value("BikeCenter"));
+                .andExpect(jsonPath("$.bikeShopId").value(1L));
 
         mockMvc.perform(get("/api/mechanic/{id}", 2L))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(2L))
                 .andExpect(jsonPath("$.name").value("Ti"))
-                .andExpect(jsonPath("$.bikeShopName").value("DragZone"));
+                .andExpect(jsonPath("$.bikeShopId").value(2L));
 
     }
 
@@ -111,7 +111,7 @@ class MechanicControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.name").value("Az"))
-                .andExpect(jsonPath("$.bikeShopName").value("BikeCenter"));
+                .andExpect(jsonPath("$.bikeShopId").value(1L));
 
     }
 
@@ -131,7 +131,7 @@ class MechanicControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.name").value("Az"))
-                .andExpect(jsonPath("$.bikeShopName").value("BikeCenter"));
+                .andExpect(jsonPath("$.bikeShopId").value(1L));
 
         mechanic1.setName("Ti");
         mechanic1.setBikeShopId(1L);
@@ -160,7 +160,7 @@ class MechanicControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.name").value("Az"))
-                .andExpect(jsonPath("$.bikeShopName").value("BikeCenter"));
+                .andExpect(jsonPath("$.bikeShopId").value(1L));
 
         mockMvc.perform(delete("/api/mechanic/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON))
