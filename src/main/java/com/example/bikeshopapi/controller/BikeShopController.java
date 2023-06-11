@@ -38,7 +38,7 @@ public class BikeShopController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         bikeShopService.delete(id);
         return ResponseEntity.noContent().build();
     }
