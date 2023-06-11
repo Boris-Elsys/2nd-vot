@@ -71,8 +71,8 @@ class MechanicControllerTest {
         mechanic2.setId(2L);
         mechanic.setName("Az");
         mechanic2.setName("Ti");
-        mechanic.setBikeShopName("BikeCenter");
-        mechanic2.setBikeShopName("DragZone");
+        mechanic.setBikeShopId(1L);
+        mechanic2.setBikeShopId(2L);
 
         when(mechanicService.getById(1L)).thenReturn(mechanic);
         when(mechanicService.getById(2L)).thenReturn(mechanic2);
@@ -100,7 +100,7 @@ class MechanicControllerTest {
 
         mechanic.setId(1L);
         mechanic.setName("Az");
-        mechanic.setBikeShopName("BikeCenter");
+        mechanic.setBikeShopId(1L);
 
         when(mechanicService.save(any(MechanicResource.class))).thenReturn(mechanic);
 
@@ -120,7 +120,7 @@ class MechanicControllerTest {
 
         mechanic1.setId(1L);
         mechanic1.setName("Az");
-        mechanic1.setBikeShopName("BikeCenter");
+        mechanic1.setBikeShopId(1L);
 
         when(mechanicService.save(any(MechanicResource.class))).thenReturn(mechanic1);
 
@@ -134,7 +134,7 @@ class MechanicControllerTest {
                 .andExpect(jsonPath("$.bikeShopName").value("BikeCenter"));
 
         mechanic1.setName("Ti");
-        mechanic1.setBikeShopName("DragZone");
+        mechanic1.setBikeShopId(1L);
 
 
         mockMvc.perform(put("/api/mechanic/{id}", 1L)
@@ -149,7 +149,7 @@ class MechanicControllerTest {
         MechanicResource mechanic = new MechanicResource();
         mechanic.setId(1L);
         mechanic.setName("Az");
-        mechanic.setBikeShopName("BikeCenter");
+        mechanic.setBikeShopId(1L);
 
         when(mechanicService.save(any(MechanicResource.class))).thenReturn(mechanic);
 
