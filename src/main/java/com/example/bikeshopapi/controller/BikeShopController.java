@@ -19,8 +19,8 @@ public class BikeShopController {
         return ResponseEntity.ok(bikeShopService.getAll());
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<?> getById(Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
         return ResponseEntity.ok(bikeShopService.getById(id));
     }
 

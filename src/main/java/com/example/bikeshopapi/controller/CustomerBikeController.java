@@ -19,8 +19,8 @@ public class CustomerBikeController {
         return ResponseEntity.ok(customerBikeService.getAll());
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<?> getById(Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
         return ResponseEntity.ok(customerBikeService.getById(id));
     }
 

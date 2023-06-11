@@ -19,8 +19,8 @@ public class PartController {
         return ResponseEntity.ok(partService.getAll());
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<?> getById(Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
         return ResponseEntity.ok(partService.getById(id));
     }
 
