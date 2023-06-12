@@ -69,7 +69,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.example.cyberneticfactory.CyberneticFactoryApplication</mainClass>
+                            <mainClass>com.example.bikeshopapi.BikeShopApiApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
