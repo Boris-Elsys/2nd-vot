@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/api/part")
@@ -60,9 +61,14 @@ public class PartController {
     }
 
     @GetMapping("/api/part/{id}/quantity-change")
-    public ResponseEntity<Integer> quantityChange(@PathVariable Long id) {
-        LocalDateTime startDate = LocalDateTime.now().minusMonths(1);
-        LocalDateTime endDate = LocalDateTime.now();
+    public ResponseEntity<Integer> quantityChange(
+            @PathVariable Long id,
+            @RequestParam("start") String startDateTime,
+            @RequestParam("end") String endDateTime
+    ) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        LocalDateTime startDate = LocalDateTime.parse(startDateTime, formatter);
+        LocalDateTime endDate = LocalDateTime.parse(endDateTime, formatter);
 
         Date start = java.sql.Timestamp.valueOf(startDate);
         Date end = java.sql.Timestamp.valueOf(endDate);
@@ -70,7 +76,5 @@ public class PartController {
         Integer quantityChange = partService.getQuantityChange(id, start, end);
         return ResponseEntity.ok(quantityChange);
     }
-
-
 
 }
