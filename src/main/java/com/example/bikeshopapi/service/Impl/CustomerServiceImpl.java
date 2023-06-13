@@ -7,7 +7,9 @@ import com.example.bikeshopapi.service.CustomerService;
 import com.example.bikeshopapi.entity.Customer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.hibernate.envers.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.bikeshopapi.mapper.CustomerMapper.CUSTOMER_MAPPER;
@@ -31,12 +33,26 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public List<CustomerResource> getAudit(Long id) {
+        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        List<Number> revisions = auditReader.getRevisions(Customer.class, id);
+        List<Customer> customers = new ArrayList<>();
+        for (Number revision : revisions) {
+            Customer customer = auditReader.find(Customer.class, id, revision);
+            customers.add(customer);
+        }
+        return CUSTOMER_MAPPER.toCustomerResources(customers);
+    }
+
+    @Override
     public CustomerResource save(CustomerResource customerResource) {
 
         Customer customerToSave = CUSTOMER_MAPPER.fromCustomerResource(customerResource);
         customerToSave.setId(customerResource.getId());
         customerToSave.setCustomerBikes(CUSTOMER_BIKE_MAPPER.fromCustomerBikeResources(customerResource.getCustomerBikes()));
         customerToSave.setName(customerResource.getName());
+        customerToSave.setCreated(customerResource.getCreated());
+        customerToSave.setLastModified(customerResource.getLastModified());
 
         return CUSTOMER_MAPPER.toCustomerResource(customerRepository.save(customerToSave));
     }
@@ -46,6 +62,8 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customerToUpdate = customerRepository.getReferenceById(id);
         customerToUpdate.setName(customerResource.getName());
         customerToUpdate.setCustomerBikes(CUSTOMER_BIKE_MAPPER.fromCustomerBikeResources(customerResource.getCustomerBikes()));
+        customerToUpdate.setCreated(customerResource.getCreated());
+        customerToUpdate.setLastModified(customerResource.getLastModified());
 
         return CUSTOMER_MAPPER.toCustomerResource(customerRepository.save(customerToUpdate));
     }

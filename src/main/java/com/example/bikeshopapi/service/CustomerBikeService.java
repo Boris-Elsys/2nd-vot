@@ -8,6 +8,7 @@ public interface CustomerBikeService{
 
     List<CustomerBikeResource> getAll();
     CustomerBikeResource getById(Long id);
+    List<CustomerBikeResource> getAudit(Long id);
     CustomerBikeResource save(CustomerBikeResource customerBike);
     CustomerBikeResource update(CustomerBikeResource customerBike, Long id);
     void delete(Long id);

@@ -24,6 +24,11 @@ public class CustomerBikeController {
         return ResponseEntity.ok(customerBikeService.getById(id));
     }
 
+    @GetMapping("/audit/{id}")
+    public ResponseEntity<?> getAudit(@PathVariable Long id) {
+        return ResponseEntity.ok(customerBikeService.getAudit(id));
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody CustomerBikeResource customerBikeResource) {
         CustomerBikeResource customerBike = customerBikeService.save(customerBikeResource);

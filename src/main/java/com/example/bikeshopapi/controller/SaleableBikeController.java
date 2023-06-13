@@ -25,6 +25,11 @@ public class SaleableBikeController {
         return ResponseEntity.ok(saleableBikeService.getById(id));
     }
 
+    @GetMapping("/audit/{id}")
+    public ResponseEntity<?> getAudit(@PathVariable Long id) {
+        return ResponseEntity.ok(saleableBikeService.getAudit(id));
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody SaleableBikeResource saleableBikeResource) {
         SaleableBikeResource saleableBike = saleableBikeService.save(saleableBikeResource);

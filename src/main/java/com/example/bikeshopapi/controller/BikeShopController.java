@@ -20,10 +20,9 @@ public class BikeShopController {
 
     }
 
-    @GetMapping("/audit")
-    public ResponseEntity<?> getAudit() {
-        return ResponseEntity.ok(bikeShopService.getAudit());
-
+    @GetMapping("/audit/{id}")
+    public ResponseEntity<?> getAudit(@PathVariable Long id) {
+        return ResponseEntity.ok(bikeShopService.getAudit(id));
     }
 
     @GetMapping("/{id}")

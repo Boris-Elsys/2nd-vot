@@ -35,7 +35,7 @@ public class BikeShopServiceImpl implements BikeShopService {
         return BIKE_SHOP_MAPPER.toBikeShopResources(bikeShopRepository.findAll());
     }
     @Override
-    public List<BikeShopResource> getAudit() {
+    public List<BikeShopResource> getAudit(Long id) {
         AuditReader auditReader = AuditReaderFactory.get(entityManager);
         List<Number> revisions = auditReader.getRevisions(BikeShop.class, id);
         List<BikeShop> bikeShops = new ArrayList<>();

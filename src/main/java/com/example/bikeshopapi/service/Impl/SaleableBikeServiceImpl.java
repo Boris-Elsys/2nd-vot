@@ -6,8 +6,11 @@ import com.example.bikeshopapi.repository.SaleableBikeRepository;
 import com.example.bikeshopapi.service.SaleableBikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.hibernate.envers.*;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import static com.example.bikeshopapi.mapper.SaleableBikeMapper.SALEABLE_BIKE_MAPPER;
 
@@ -28,6 +31,20 @@ public class SaleableBikeServiceImpl implements SaleableBikeService {
     }
 
     @Override
+    public List<SaleableBikeResource> getAudit(Long id){
+
+        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        List<Number> revisions = auditReader.getRevisions(SaleableBike.class, id);
+        List<SaleableBike> saleableBikes = new ArrayList<>();
+        for (Number revision : revisions) {
+            SaleableBike saleableBike = auditReader.find(SaleableBike.class, id, revision);
+            saleableBikes.add(saleableBike);
+        }
+        return SALEABLE_BIKE_MAPPER.toSaleableBikeResources(saleableBikes);
+
+    }
+
+    @Override
     public SaleableBikeResource save(SaleableBikeResource saleableBikeResource) {
 
         SaleableBike saleableBikeToSave = SALEABLE_BIKE_MAPPER.fromSaleableBikeResource(saleableBikeResource);
@@ -41,6 +58,8 @@ public class SaleableBikeServiceImpl implements SaleableBikeService {
         saleableBikeToSave.setFrame(saleableBikeToSave.getFrame());
         saleableBikeToSave.setFork(saleableBikeToSave.getFork());
         saleableBikeToSave.setShock(saleableBikeToSave.getShock());
+        saleableBikeToSave.setCreated(saleableBikeToSave.getCreated());
+        saleableBikeToSave.setLastModified(saleableBikeToSave.getLastModified());
 
         return SALEABLE_BIKE_MAPPER.toSaleableBikeResource(saleableBikeRepository.save(saleableBikeToSave));
     }
@@ -59,6 +78,9 @@ public class SaleableBikeServiceImpl implements SaleableBikeService {
         saleableBikeToUpdate.setFrame(saleableBikeToUpdate.getFrame());
         saleableBikeToUpdate.setFork(saleableBikeToUpdate.getFork());
         saleableBikeToUpdate.setShock(saleableBikeToUpdate.getShock());
+        saleableBikeToUpdate.setPrice(saleableBikeToUpdate.getPrice());
+        saleableBikeToUpdate.setCreated(saleableBikeToUpdate.getCreated());
+        saleableBikeToUpdate.setLastModified(saleableBikeToUpdate.getLastModified());
 
         return SALEABLE_BIKE_MAPPER.toSaleableBikeResource(saleableBikeRepository.save(SALEABLE_BIKE_MAPPER.fromSaleableBikeResource(saleableBikeResource)));
 

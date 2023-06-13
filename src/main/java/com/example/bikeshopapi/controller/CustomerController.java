@@ -24,6 +24,11 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getById(id));
     }
 
+    @GetMapping("/audit/{id}")
+    public ResponseEntity<?> getAudit(@PathVariable Long id) {
+        return ResponseEntity.ok(customerService.getAudit(id));
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody CustomerResource customerResource) {
         CustomerResource customer = customerService.save(customerResource);

@@ -8,6 +8,7 @@ public interface PartService {
 
     List<PartResource> getAll();
     PartResource getById(Long id);
+    List<PartResource> getAudit(Long id);
     PartResource save(PartResource part);
     PartResource update(PartResource part, Long id);
     void delete(Long id);

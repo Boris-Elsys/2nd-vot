@@ -6,7 +6,10 @@ import com.example.bikeshopapi.repository.CustomerBikeRepository;
 import com.example.bikeshopapi.service.CustomerBikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.hibernate.envers.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.bikeshopapi.mapper.CustomerBikeMapper.CUSTOMER_BIKE_MAPPER;
@@ -27,10 +30,25 @@ public class CustomerBikeServiceImpl implements CustomerBikeService {
     }
 
     @Override
+    public List<CustomerBikeResource> getAudit(Long id) {
+        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        List<Number> revisions = auditReader.getRevisions(CustomerBike.class, id);
+        List<CustomerBike> customerBikes = new ArrayList<>();
+        for (Number revision : revisions) {
+            CustomerBike customerBike = auditReader.find(CustomerBike.class, id, revision);
+            customerBikes.add(customerBike);
+        }
+        return CUSTOMER_BIKE_MAPPER.toCustomerBikeResources(customerBikes);
+
+    }
+
+    @Override
     public CustomerBikeResource save(CustomerBikeResource customerBikeResource) {
 
         CustomerBike customerBikeToSave = CUSTOMER_BIKE_MAPPER.fromCustomerBikeResource(customerBikeResource);
         customerBikeToSave.setBikeShop(customerBikeToSave.getBikeShop());
+        customerBikeToSave.setCreated(customerBikeToSave.getCreated());
+        customerBikeToSave.setLastModified(customerBikeToSave.getLastModified());
         customerBikeToSave.setOwner(customerBikeToSave.getOwner());
         customerBikeToSave.setBrand(customerBikeToSave.getBrand());
         customerBikeToSave.setModel(customerBikeToSave.getModel());
@@ -50,6 +68,8 @@ public class CustomerBikeServiceImpl implements CustomerBikeService {
         CustomerBike customerBikeToUpdate = customerBikeRepository.getReferenceById(id);
         customerBikeToUpdate.setBikeShop(customerBikeToUpdate.getBikeShop());
         customerBikeToUpdate.setOwner(customerBikeToUpdate.getOwner());
+        customerBikeToUpdate.setCreated(customerBikeToUpdate.getCreated());
+        customerBikeToUpdate.setLastModified(customerBikeToUpdate.getLastModified());
         customerBikeToUpdate.setBrand(customerBikeToUpdate.getBrand());
         customerBikeToUpdate.setModel(customerBikeToUpdate.getModel());
         customerBikeToUpdate.setColor(customerBikeToUpdate.getColor());

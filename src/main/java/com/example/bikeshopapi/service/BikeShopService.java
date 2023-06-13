@@ -10,7 +10,7 @@ public interface BikeShopService {
     BikeShopResource getById(Long id);
     BikeShopResource save(BikeShopResource bikeShop);
     BikeShopResource update(BikeShopResource bikeShop, Long id);
-    List<BikeShopResource> getAudit();
+    List<BikeShopResource> getAudit(Long id);
     void delete(Long id);
 
 }

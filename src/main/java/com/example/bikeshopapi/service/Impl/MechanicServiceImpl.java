@@ -8,7 +8,9 @@ import com.example.bikeshopapi.repository.MechanicRepository;
 import com.example.bikeshopapi.service.MechanicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.hibernate.envers.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.bikeshopapi.mapper.MechanicMapper.MECHANIC_MAPPER;
@@ -30,6 +32,20 @@ public class MechanicServiceImpl implements MechanicService {
     @Override
     public List<MechanicResource> getAll() {
         return MECHANIC_MAPPER.toMechanicResources(mechanicRepository.findAll());
+    }
+
+    @Override
+    public List<MechanicResource> getAudit(Long id){
+
+        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        List<Number> revisions = auditReader.getRevisions(Mechanic.class, id);
+        List<Mechanic> mechanics = new ArrayList<>();
+        for (Number revision : revisions) {
+            Mechanic mechanic = auditReader.find(Mechanic.class, id, revision);
+            mechanics.add(mechanic);
+        }
+        return MECHANIC_MAPPER.toMechanicResources(mechanics);
+
     }
 
     @Override

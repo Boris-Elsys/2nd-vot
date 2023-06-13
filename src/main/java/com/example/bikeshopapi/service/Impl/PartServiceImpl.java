@@ -7,8 +7,11 @@ import com.example.bikeshopapi.repository.PartRepository;
 import com.example.bikeshopapi.service.PartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.hibernate.envers.*;
+
 
 import java.util.List;
+import java.util.ArrayList;
 
 import static com.example.bikeshopapi.mapper.PartMapper.PART_MAPPER;
 
@@ -27,6 +30,20 @@ public class PartServiceImpl implements PartService {
     @Override
     public List<PartResource> getAll() {
         return PART_MAPPER.toPartResources(partRepository.findAll());
+    }
+
+    @Override
+    public List<PartResource> getAudit(Long id){
+
+        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        List<Number> revisions = auditReader.getRevisions(Part.class, id);
+        List<Part> parts = new ArrayList<>();
+        for (Number revision : revisions) {
+            Part part = auditReader.find(Part.class, id, revision);
+            parts.add(part);
+        }
+        return PART_MAPPER.toPartResources(parts);
+
     }
 
     @Override

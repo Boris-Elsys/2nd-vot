@@ -31,6 +31,11 @@ public class PartController {
         return ResponseEntity.ok(partService.getById(id));
     }
 
+    @GetMapping("/audit/{id}")
+    public ResponseEntity<?> getAudit(@PathVariable Long id) {
+        return ResponseEntity.ok(partService.getAudit(id));
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody PartResource partResource) {
         PartResource part = partService.save(partResource);

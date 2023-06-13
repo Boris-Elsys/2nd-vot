@@ -24,6 +24,11 @@ public class MechanicController {
         return ResponseEntity.ok(mechanicService.getById(id));
     }
 
+    @GetMapping("/audit/{id}")
+    public ResponseEntity<?> getAudit(@PathVariable Long id) {
+        return ResponseEntity.ok(mechanicService.getAudit(id));
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody MechanicResource mechanicResource) {
         MechanicResource mechanic = mechanicService.save(mechanicResource);
