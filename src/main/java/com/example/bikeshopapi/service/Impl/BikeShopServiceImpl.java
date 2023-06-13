@@ -7,7 +7,9 @@ import com.example.bikeshopapi.entity.BikeShop;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.hibernate.envers.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.bikeshopapi.mapper.BikeShopMapper.BIKE_SHOP_MAPPER;
@@ -32,12 +34,26 @@ public class BikeShopServiceImpl implements BikeShopService {
     public List<BikeShopResource> getAll() {
         return BIKE_SHOP_MAPPER.toBikeShopResources(bikeShopRepository.findAll());
     }
+    @Override
+    public List<BikeShopResource> getAudit() {
+        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        List<Number> revisions = auditReader.getRevisions(BikeShop.class, id);
+        List<BikeShop> bikeShops = new ArrayList<>();
+        for (Number revision : revisions) {
+            BikeShop bikeShop = auditReader.find(BikeShop.class, id, revision);
+            bikeShops.add(bikeShop);
+        }
+        return BIKE_SHOP_MAPPER.toBikeShopResources(bikeShops);
+
+    }
 
     @Override
     public BikeShopResource save(BikeShopResource bikeShopResource) {
 
         BikeShop bikeShopToSave = BIKE_SHOP_MAPPER.fromBikeShopResource(bikeShopResource);
         bikeShopToSave.setName(bikeShopResource.getName());
+        bikeShopToSave.setCreated(bikeShopResource.getCreated());
+        bikeShopToSave.setLastModified(bikeShopResource.getLastModified());
         bikeShopToSave.setAddress(bikeShopResource.getAddress());
         bikeShopToSave.setPhone(bikeShopResource.getPhone());
         bikeShopToSave.setMechanics(MECHANIC_MAPPER.fromMechanicResources(bikeShopResource.getMechanics()));

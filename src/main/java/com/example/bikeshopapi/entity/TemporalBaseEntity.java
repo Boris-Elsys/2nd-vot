@@ -1,6 +1,7 @@
 package com.example.bikeshopapi.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -9,8 +10,12 @@ import java.util.Date;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Temporal;
 
+import org.hibernate.envers.Audited;
+
+@Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Audited
 public abstract class TemporalBaseEntity {
 
     @CreatedDate
@@ -35,4 +40,10 @@ public abstract class TemporalBaseEntity {
     public void setLastModified(Date lastModified) {
         this.lastModified = lastModified;
     }
+
+    @PreUpdate
+    public void preUpdate() {
+        lastModified = new Date();
+    }
+
 }

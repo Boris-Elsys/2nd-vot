@@ -17,6 +17,13 @@ public class BikeShopController {
     @GetMapping
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(bikeShopService.getAll());
+
+    }
+
+    @GetMapping("/audit")
+    public ResponseEntity<?> getAudit() {
+        return ResponseEntity.ok(bikeShopService.getAudit());
+
     }
 
     @GetMapping("/{id}")

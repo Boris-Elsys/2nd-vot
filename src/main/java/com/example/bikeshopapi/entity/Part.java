@@ -1,10 +1,9 @@
 package com.example.bikeshopapi.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import org.hibernate.envers.*;
 
 @Entity
 @Data
@@ -15,10 +14,16 @@ public class Part extends TemporalBaseEntity {
     private Long id;
 
     @ManyToOne
+    @NotAudited
     private BikeShop bikeShop;
 
     private String name;
     private double price;
     private int quantity;
+
+    @PreUpdate
+    public void preUpdate() {
+        super.preUpdate();
+    }
 
 }

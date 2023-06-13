@@ -1,10 +1,9 @@
 package com.example.bikeshopapi.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import org.hibernate.envers.*;
 
 @Entity
 @Data
@@ -18,6 +17,12 @@ public class Mechanic extends TemporalBaseEntity {
     private Long salary;
 
     @ManyToOne
+    @NotAudited
     private BikeShop bikeShop;
+
+    @PreUpdate
+    public void preUpdate() {
+        super.preUpdate();
+    }
 
 }
