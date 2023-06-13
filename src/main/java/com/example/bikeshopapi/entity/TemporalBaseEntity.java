@@ -42,8 +42,11 @@ public abstract class TemporalBaseEntity {
     }
 
     @PreUpdate
+    @PrePersist
+    @PreRemove
     public void preUpdate() {
         lastModified = new Date();
+        created = new Date();
     }
 
 }

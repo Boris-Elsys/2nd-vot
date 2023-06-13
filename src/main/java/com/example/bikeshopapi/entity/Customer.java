@@ -15,15 +15,12 @@ public class Customer extends TemporalBaseEntity {
     @GeneratedValue
     private Long id;
 
+    @Audited
     private String name;
 
     @OneToMany(mappedBy = "owner")
     @NotAudited
     private List<CustomerBike> customerBikes;
 
-    @PreUpdate
-    public void preUpdate() {
-        super.preUpdate();
-    }
 
 }

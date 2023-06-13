@@ -15,8 +15,11 @@ public class BikeShop extends TemporalBaseEntity {
     @GeneratedValue
     private Long id;
 
+    @Audited
     private String name;
+    @Audited
     private String address;
+    @Audited
     private String phone;
 
     @OneToMany(mappedBy = "bikeShop")
@@ -31,11 +34,5 @@ public class BikeShop extends TemporalBaseEntity {
     @OneToMany(mappedBy = "bikeShop")
     @NotAudited
     private List<CustomerBike> customerBikes;
-
-    @PreUpdate
-    public void preUpdate() {
-        super.preUpdate();
-    }
-
 
 }

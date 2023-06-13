@@ -7,5 +7,4 @@ public class SaleableBikeResource extends BikeResource {
 
     private Long bikeShopId;
     private double price;
-
 }

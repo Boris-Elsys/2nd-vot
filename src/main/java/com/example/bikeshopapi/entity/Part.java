@@ -21,9 +21,4 @@ public class Part extends TemporalBaseEntity {
     private double price;
     private int quantity;
 
-    @PreUpdate
-    public void preUpdate() {
-        super.preUpdate();
-    }
-
 }

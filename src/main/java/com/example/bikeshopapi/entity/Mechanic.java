@@ -20,9 +20,5 @@ public class Mechanic extends TemporalBaseEntity {
     @NotAudited
     private BikeShop bikeShop;
 
-    @PreUpdate
-    public void preUpdate() {
-        super.preUpdate();
-    }
 
 }

@@ -4,6 +4,7 @@ import com.example.bikeshopapi.controller.resources.BikeShopResource;
 import com.example.bikeshopapi.repository.BikeShopRepository;
 import com.example.bikeshopapi.service.BikeShopService;
 import com.example.bikeshopapi.entity.BikeShop;
+import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.bikeshopapi.mapper.BikeShopMapper.BIKE_SHOP_MAPPER;
-import static com.example.bikeshopapi.mapper.CustomerMapper.CUSTOMER_MAPPER;
 import static com.example.bikeshopapi.mapper.CustomerBikeMapper.CUSTOMER_BIKE_MAPPER;
 import static com.example.bikeshopapi.mapper.MechanicMapper.MECHANIC_MAPPER;
 import static com.example.bikeshopapi.mapper.PartMapper.PART_MAPPER;
@@ -24,6 +24,7 @@ import static com.example.bikeshopapi.mapper.SaleableBikeMapper.SALEABLE_BIKE_MA
 public class BikeShopServiceImpl implements BikeShopService {
 
     private final BikeShopRepository bikeShopRepository;
+    private final EntityManagerFactory entityManager;
 
     @Override
     public BikeShopResource getById(Long id) {
@@ -36,7 +37,7 @@ public class BikeShopServiceImpl implements BikeShopService {
     }
     @Override
     public List<BikeShopResource> getAudit(Long id) {
-        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        AuditReader auditReader = AuditReaderFactory.get(entityManager.createEntityManager());
         List<Number> revisions = auditReader.getRevisions(BikeShop.class, id);
         List<BikeShop> bikeShops = new ArrayList<>();
         for (Number revision : revisions) {

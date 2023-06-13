@@ -7,6 +7,7 @@ import org.hibernate.envers.*;
 
 @Entity
 @Data
+@Audited
 public class CustomerBike extends Bike {
 
     @ManyToOne
@@ -17,9 +18,5 @@ public class CustomerBike extends Bike {
     @NotAudited
     private Customer owner;
 
-    @PreUpdate
-    public void preUpdate() {
-        super.preUpdate();
-    }
 
 }

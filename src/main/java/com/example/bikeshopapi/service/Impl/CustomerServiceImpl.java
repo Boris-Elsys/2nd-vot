@@ -5,6 +5,7 @@ import com.example.bikeshopapi.controller.resources.CustomerResource;
 import com.example.bikeshopapi.repository.CustomerRepository;
 import com.example.bikeshopapi.service.CustomerService;
 import com.example.bikeshopapi.entity.Customer;
+import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.hibernate.envers.*;
@@ -21,6 +22,7 @@ import static com.example.bikeshopapi.mapper.CustomerBikeMapper.CUSTOMER_BIKE_MA
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final EntityManagerFactory entityManager;
 
     @Override
     public CustomerResource getById(Long id) {
@@ -34,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerResource> getAudit(Long id) {
-        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        AuditReader auditReader = AuditReaderFactory.get(entityManager.createEntityManager());
         List<Number> revisions = auditReader.getRevisions(Customer.class, id);
         List<Customer> customers = new ArrayList<>();
         for (Number revision : revisions) {
@@ -48,11 +50,8 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerResource save(CustomerResource customerResource) {
 
         Customer customerToSave = CUSTOMER_MAPPER.fromCustomerResource(customerResource);
-        customerToSave.setId(customerResource.getId());
         customerToSave.setCustomerBikes(CUSTOMER_BIKE_MAPPER.fromCustomerBikeResources(customerResource.getCustomerBikes()));
         customerToSave.setName(customerResource.getName());
-        customerToSave.setCreated(customerResource.getCreated());
-        customerToSave.setLastModified(customerResource.getLastModified());
 
         return CUSTOMER_MAPPER.toCustomerResource(customerRepository.save(customerToSave));
     }

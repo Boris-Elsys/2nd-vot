@@ -9,15 +9,12 @@ import org.hibernate.envers.*;
 @Data
 public class SaleableBike extends Bike {
 
+    @Audited
     private double price;
 
     @ManyToOne
     @NotAudited
     private BikeShop bikeShop;
 
-    @PreUpdate
-    public void preUpdate() {
-        super.preUpdate();
-    }
 
 }

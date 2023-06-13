@@ -6,6 +6,7 @@ import com.example.bikeshopapi.entity.Mechanic;
 import com.example.bikeshopapi.repository.BikeShopRepository;
 import com.example.bikeshopapi.repository.MechanicRepository;
 import com.example.bikeshopapi.service.MechanicService;
+import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.hibernate.envers.*;
@@ -21,6 +22,7 @@ public class MechanicServiceImpl implements MechanicService {
 
     private final MechanicRepository mechanicRepository;
     private final BikeShopRepository bikeShopRepository;
+    private final EntityManagerFactory entityManager;
 
     @Override
     public MechanicResource getById(Long id) {
@@ -37,7 +39,7 @@ public class MechanicServiceImpl implements MechanicService {
     @Override
     public List<MechanicResource> getAudit(Long id){
 
-        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        AuditReader auditReader = AuditReaderFactory.get(entityManager.createEntityManager());
         List<Number> revisions = auditReader.getRevisions(Mechanic.class, id);
         List<Mechanic> mechanics = new ArrayList<>();
         for (Number revision : revisions) {

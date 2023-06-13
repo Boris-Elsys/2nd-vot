@@ -4,6 +4,7 @@ import com.example.bikeshopapi.controller.resources.SaleableBikeResource;
 import com.example.bikeshopapi.entity.SaleableBike;
 import com.example.bikeshopapi.repository.SaleableBikeRepository;
 import com.example.bikeshopapi.service.SaleableBikeService;
+import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.hibernate.envers.*;
@@ -19,6 +20,7 @@ import static com.example.bikeshopapi.mapper.SaleableBikeMapper.SALEABLE_BIKE_MA
 public class SaleableBikeServiceImpl implements SaleableBikeService {
 
     private final SaleableBikeRepository saleableBikeRepository;
+    private final EntityManagerFactory entityManager;
 
     @Override
     public SaleableBikeResource getById(Long id) {
@@ -33,7 +35,7 @@ public class SaleableBikeServiceImpl implements SaleableBikeService {
     @Override
     public List<SaleableBikeResource> getAudit(Long id){
 
-        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        AuditReader auditReader = AuditReaderFactory.get(entityManager.createEntityManager());
         List<Number> revisions = auditReader.getRevisions(SaleableBike.class, id);
         List<SaleableBike> saleableBikes = new ArrayList<>();
         for (Number revision : revisions) {

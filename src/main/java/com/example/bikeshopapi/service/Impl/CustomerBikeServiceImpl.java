@@ -4,6 +4,7 @@ import com.example.bikeshopapi.controller.resources.CustomerBikeResource;
 import com.example.bikeshopapi.entity.CustomerBike;
 import com.example.bikeshopapi.repository.CustomerBikeRepository;
 import com.example.bikeshopapi.service.CustomerBikeService;
+import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import static com.example.bikeshopapi.mapper.CustomerBikeMapper.CUSTOMER_BIKE_MA
 @RequiredArgsConstructor
 public class CustomerBikeServiceImpl implements CustomerBikeService {
     private final CustomerBikeRepository customerBikeRepository;
+    private final EntityManagerFactory entityManager;
 
     @Override
     public CustomerBikeResource getById(Long id) {
@@ -31,7 +33,7 @@ public class CustomerBikeServiceImpl implements CustomerBikeService {
 
     @Override
     public List<CustomerBikeResource> getAudit(Long id) {
-        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        AuditReader auditReader = AuditReaderFactory.get(entityManager.createEntityManager());
         List<Number> revisions = auditReader.getRevisions(CustomerBike.class, id);
         List<CustomerBike> customerBikes = new ArrayList<>();
         for (Number revision : revisions) {

@@ -5,6 +5,7 @@ import com.example.bikeshopapi.entity.Part;
 import com.example.bikeshopapi.repository.BikeShopRepository;
 import com.example.bikeshopapi.repository.PartRepository;
 import com.example.bikeshopapi.service.PartService;
+import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.hibernate.envers.*;
@@ -21,6 +22,7 @@ public class PartServiceImpl implements PartService {
 
     private final PartRepository partRepository;
     private final BikeShopRepository bikeShopRepository;
+    private final EntityManagerFactory entityManager;
 
     @Override
     public PartResource getById(Long id) {
@@ -35,7 +37,7 @@ public class PartServiceImpl implements PartService {
     @Override
     public List<PartResource> getAudit(Long id){
 
-        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        AuditReader auditReader = AuditReaderFactory.get(entityManager.createEntityManager());
         List<Number> revisions = auditReader.getRevisions(Part.class, id);
         List<Part> parts = new ArrayList<>();
         for (Number revision : revisions) {
