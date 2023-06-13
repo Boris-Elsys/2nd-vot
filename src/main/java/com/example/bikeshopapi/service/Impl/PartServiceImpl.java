@@ -78,5 +78,26 @@ public class PartServiceImpl implements PartService {
         partRepository.deleteById(id);
     }
 
+    @Override
+    public Integer monthlySold(Long id) {
+        AuditReader auditReader = AuditReaderFactory.get(entityManager.createEntityManager());
+        List<Number> revisions = auditReader.getRevisions(Part.class, id);
+        List<Part> parts = new ArrayList<>();
+        for (Number revision : revisions) {
+            Part part = auditReader.find(Part.class, id, revision);
+            parts.add(part);
+        }
 
+        // Compare the quantity of parts at the beginning of the month to the current quantity
+        // If there is a difference, return it in JSON format
+        // Otherwise, return 0 to indicate no change
+        if (parts.size() >= 2) {
+            Part currentPart = parts.get(parts.size() - 1);
+            Part previousPart = parts.get(parts.size() - 2);
+            int quantityDifference = currentPart.getQuantity() - previousPart.getQuantity();
+            return quantityDifference;
+        } else {
+            return 0;
+        }
+    }
 }

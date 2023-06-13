@@ -55,6 +55,10 @@ public class PartController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}/monthly-sold")
+    public ResponseEntity<Integer> monthlySold(@PathVariable Long id) {
 
+        return ResponseEntity.ok(partService.monthlySold(id));
+    }
 
 }

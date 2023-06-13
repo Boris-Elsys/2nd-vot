@@ -13,4 +13,6 @@ public interface PartService {
     PartResource update(PartResource part, Long id);
     void delete(Long id);
 
+    Integer monthlySold(Long id);
+
 }
