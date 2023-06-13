@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Part {
+public class Part extends TemporalBaseEntity {
 
     @Id
     @GeneratedValue

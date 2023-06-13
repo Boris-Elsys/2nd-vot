@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class Customer {
+public class Customer extends TemporalBaseEntity {
 
     @Id
     @GeneratedValue

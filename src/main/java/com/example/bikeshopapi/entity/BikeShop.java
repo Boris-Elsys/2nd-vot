@@ -7,11 +7,11 @@ import java.util.List;
 
 @Entity
 @Data
-public class BikeShop {
+public class BikeShop extends TemporalBaseEntity {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     private String name;
     private String address;

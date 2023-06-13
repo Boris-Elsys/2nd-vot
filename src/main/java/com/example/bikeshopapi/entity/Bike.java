@@ -3,7 +3,7 @@ package com.example.bikeshopapi.entity;
 import jakarta.persistence.*;
 
 @MappedSuperclass
-public abstract class Bike {
+public abstract class Bike extends TemporalBaseEntity{
 
     @Id
     @GeneratedValue

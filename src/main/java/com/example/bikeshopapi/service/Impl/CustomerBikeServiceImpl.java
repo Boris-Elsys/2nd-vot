@@ -48,7 +48,6 @@ public class CustomerBikeServiceImpl implements CustomerBikeService {
     public CustomerBikeResource update(CustomerBikeResource customerBikeResource, Long id) {
 
         CustomerBike customerBikeToUpdate = customerBikeRepository.getReferenceById(id);
-        customerBikeToUpdate.setId(customerBikeToUpdate.getId());
         customerBikeToUpdate.setBikeShop(customerBikeToUpdate.getBikeShop());
         customerBikeToUpdate.setOwner(customerBikeToUpdate.getOwner());
         customerBikeToUpdate.setBrand(customerBikeToUpdate.getBrand());

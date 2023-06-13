@@ -2,10 +2,16 @@ package com.example.bikeshopapi.controller;
 
 import com.example.bikeshopapi.controller.resources.PartResource;
 import com.example.bikeshopapi.service.PartService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/part")
@@ -13,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class PartController {
 
     private final PartService partService;
+    private final ObjectMapper objectMapper;
 
     @GetMapping
     public ResponseEntity<?> getAll() {

@@ -8,13 +8,14 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Mechanic {
+public class Mechanic extends TemporalBaseEntity {
 
     @Id
     @GeneratedValue
     private Long id;
 
     private String name;
+    private Long salary;
 
     @ManyToOne
     private BikeShop bikeShop;

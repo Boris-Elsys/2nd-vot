@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class CustomerBike extends Bike{
+public class CustomerBike extends Bike {
 
     @ManyToOne
     private BikeShop bikeShop;

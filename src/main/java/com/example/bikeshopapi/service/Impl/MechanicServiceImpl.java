@@ -22,8 +22,10 @@ public class MechanicServiceImpl implements MechanicService {
 
     @Override
     public MechanicResource getById(Long id) {
-        return MECHANIC_MAPPER.toMechanicResource(mechanicRepository.getReferenceById(id));
+        Mechanic mechanic = mechanicRepository.getById(id);
+        return MECHANIC_MAPPER.toMechanicResource(mechanic);
     }
+
 
     @Override
     public List<MechanicResource> getAll() {
@@ -47,7 +49,6 @@ public class MechanicServiceImpl implements MechanicService {
     public MechanicResource update(MechanicResource mechanicResource, Long id) {
 
             Mechanic mechanicToUpdate = mechanicRepository.getReferenceById(id);
-            mechanicToUpdate.setId(mechanicResource.getId());
             mechanicToUpdate.setName(mechanicResource.getName());
             mechanicToUpdate.setBikeShop(bikeShopRepository.getReferenceById(mechanicResource.getBikeShopId()));
 

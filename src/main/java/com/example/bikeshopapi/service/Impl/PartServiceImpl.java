@@ -46,7 +46,6 @@ public class PartServiceImpl implements PartService {
     public PartResource update(PartResource partResource, Long id) {
 
             Part partToUpdate = partRepository.getReferenceById(id);
-            partToUpdate.setId(partResource.getId());
             partToUpdate.setName(partResource.getName());
             partToUpdate.setPrice(partResource.getPrice());
             partToUpdate.setQuantity(partResource.getQuantity());
