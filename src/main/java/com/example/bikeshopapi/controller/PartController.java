@@ -8,10 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/part")
@@ -60,5 +58,19 @@ public class PartController {
 
         return ResponseEntity.ok(partService.monthlySold(id));
     }
+
+    @GetMapping("/api/part/{id}/quantity-change")
+    public ResponseEntity<Integer> quantityChange(@PathVariable Long id) {
+        LocalDateTime startDate = LocalDateTime.now().minusMonths(1);
+        LocalDateTime endDate = LocalDateTime.now();
+
+        Date start = java.sql.Timestamp.valueOf(startDate);
+        Date end = java.sql.Timestamp.valueOf(endDate);
+
+        Integer quantityChange = partService.getQuantityChange(id, start, end);
+        return ResponseEntity.ok(quantityChange);
+    }
+
+
 
 }

@@ -7,6 +7,7 @@ import org.hibernate.envers.*;
 
 @Entity
 @Data
+@Audited
 public class Part extends TemporalBaseEntity {
 
     @Id

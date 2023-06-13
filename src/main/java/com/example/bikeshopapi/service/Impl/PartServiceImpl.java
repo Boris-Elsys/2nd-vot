@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.hibernate.envers.*;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -95,9 +96,37 @@ public class PartServiceImpl implements PartService {
             Part currentPart = parts.get(parts.size() - 1);
             Part previousPart = parts.get(parts.size() - 2);
             int quantityDifference = currentPart.getQuantity() - previousPart.getQuantity();
-            return quantityDifference;
+            return Math.abs(quantityDifference);
         } else {
             return 0;
         }
     }
+
+    @Override
+    public Integer getQuantityChange(Long id, Date start, Date end) {
+        AuditReader auditReader = AuditReaderFactory.get(entityManager.createEntityManager());
+
+        // Retrieve the list of revisions for the specified part
+        List<Number> revisions = auditReader.getRevisions(Part.class, id);
+
+        List<Part> parts = new ArrayList<>();
+        for (Number revision : revisions) {
+            Part part = auditReader.find(Part.class, id, revision);
+            Date revisionDate = part.getLastModified(); // Assuming lastModified represents the revision date
+            if (revisionDate.after(start) && revisionDate.before(end)) {
+                parts.add(part);
+            }
+        }
+
+        // Calculate the total change in quantity by comparing the first and last revisions
+        if (!parts.isEmpty()) {
+            Part firstPart = parts.get(0);
+            Part lastPart = parts.get(parts.size() - 1);
+            int quantityChange = lastPart.getQuantity() - firstPart.getQuantity();
+            return quantityChange;
+        } else {
+            return 0;
+        }
+    }
+
 }

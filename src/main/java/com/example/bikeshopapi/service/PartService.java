@@ -2,6 +2,7 @@ package com.example.bikeshopapi.service;
 
 import com.example.bikeshopapi.controller.resources.PartResource;
 
+import java.util.Date;
 import java.util.List;
 
 public interface PartService {
@@ -14,5 +15,6 @@ public interface PartService {
     void delete(Long id);
 
     Integer monthlySold(Long id);
+    Integer getQuantityChange(Long id, Date start, Date end);
 
 }
