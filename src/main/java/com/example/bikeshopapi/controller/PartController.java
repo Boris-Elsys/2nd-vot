@@ -77,4 +77,11 @@ public class PartController {
         return ResponseEntity.ok(quantityChange);
     }
 
+    @GetMapping("/{id}/latest-version-before/{date}")
+    public ResponseEntity<PartResource> getLatestVersionBeforeDate(@PathVariable Long id, @PathVariable String date) {
+        LocalDateTime dateTime = LocalDateTime.parse(date); // Assumes date format: "yyyy-MM-dd'T'HH:mm:ss"
+        PartResource partResource = partService.getLatestVersionBeforeDate(id, dateTime);
+        return ResponseEntity.ok(partResource);
+    }
+
 }

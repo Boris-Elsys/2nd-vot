@@ -2,6 +2,7 @@ package com.example.bikeshopapi.service;
 
 import com.example.bikeshopapi.controller.resources.PartResource;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -16,5 +17,6 @@ public interface PartService {
 
     Integer monthlySold(Long id);
     Integer getQuantityChange(Long id, Date start, Date end);
+    PartResource getLatestVersionBeforeDate(Long partId, LocalDateTime date);
 
 }

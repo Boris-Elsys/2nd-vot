@@ -5,12 +5,15 @@ import com.example.bikeshopapi.entity.Part;
 import com.example.bikeshopapi.repository.BikeShopRepository;
 import com.example.bikeshopapi.repository.PartRepository;
 import com.example.bikeshopapi.service.PartService;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.envers.query.AuditEntity;
 import org.springframework.stereotype.Service;
 import org.hibernate.envers.*;
 
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -127,6 +130,37 @@ public class PartServiceImpl implements PartService {
         } else {
             return 0;
         }
+    }
+
+
+    @Override
+    public PartResource getLatestVersionBeforeDate(Long partId, LocalDateTime date) {
+        EntityManager entityManager2 = entityManager.createEntityManager();
+        AuditReader auditReader = AuditReaderFactory.get(entityManager2);
+
+        Date targetDate = java.sql.Timestamp.valueOf(date);
+
+        Object[] revision = (Object[]) auditReader.createQuery()
+                .forRevisionsOfEntity(Part.class, false, true)
+                .add(AuditEntity.id().eq(partId))
+                .add(AuditEntity.revisionProperty("timestamp").le(targetDate))
+                .addOrder(AuditEntity.revisionNumber().desc())
+                .setMaxResults(1)
+                .getSingleResult();
+
+        Long revisionId = (Long) revision[0];
+        Part part = auditReader.find(Part.class, partId, revisionId);
+
+        // Update the entity with the latest version
+        entityManager2.detach(part);
+        entityManager2.merge(part);
+
+        entityManager2.close(); // Remember to close the EntityManager
+
+        // Map the Part entity to a PartResource object
+        PartResource partResource = PART_MAPPER.toPartResource(part);
+
+        return partResource;
     }
 
 }
